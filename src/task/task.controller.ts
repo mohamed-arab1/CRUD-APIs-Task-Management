@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
 // eslint-disable-next-line prettier/prettier
-import { Body, Controller, Delete, Get, Param, Post, Put, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { TaskService } from './task.service';
 import { Task } from './schemas/task.schema';
 import { CreateTaskDto } from './dto/create-task.dto';
-import { AuthGuard } from '@nestjs/passport';
+
 
 @Controller('api/tasks')
 export class TaskController {
@@ -16,13 +16,11 @@ export class TaskController {
     }
 
     @Post()
-    @UseGuards(AuthGuard())
     async createTask(
         @Body()
         task: CreateTaskDto,
-        @Req() req,
     ): Promise<Task>{
-        return this.taskService.create(task, req.user);
+        return this.taskService.create(task);
     }
 
     @Put( ':id' )

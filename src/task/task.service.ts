@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Task } from './schemas/task.schema';
 import * as mongoose from 'mongoose';
-import { User } from '../auth/Schemas/user.schema';
+
 
 @Injectable()
 export class TaskService {
@@ -17,8 +17,8 @@ export class TaskService {
         return tasks;
     }
 
-    async create(task: Task, user: User): Promise<Task> {
-        const data = Object.assign(task, {user: user._id})
+    async create(task: Task): Promise<Task> {
+        const data = Object.assign(task)
         const res = await this.taskModel.create(data);
         return res;
     }

@@ -1,8 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { Body, Controller, Post } from '@nestjs/common';
-import { AuthService } from './auth.service';
+import { AuthService, MyUserType } from './auth.service';
 import { SignUpDto } from './dto/signUp.dto';
 import { LoginDto } from './dto/logIn.dto';
+
 
 @Controller('auth')
 export class AuthController {
@@ -19,7 +20,7 @@ export class AuthController {
     logIn(
         @Body()
         loginDto: LoginDto
-    ): Promise<{token: string}>{
+    ): Promise<{token: string, user: MyUserType}>{
         return this.authService.login(loginDto);
     }
 }
